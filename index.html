@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maison d'hotes la tour de toile - Taroudant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --gold: #d4af37;
+            --gold-hover: #f3e5ab;
+            --bg-dark: #0f1115;
+            --card-bg: #181b20;
+            --text-light: #f5f5f5;
+            --text-muted: #a0a0a0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
+
+        /* Navigation Bar */
+        header {
+            background: rgba(15, 17, 21, 0.95);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1300px; margin: 0 auto; display: flex;
+            justify-content: space-between; align-items: center; padding: 15px 30px;
+        }
+
+        .brand { display: flex; align-items: center; gap: 15px; }
+        .brand img { height: 50px; }
+        .brand-text { font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--gold); letter-spacing: 2px; }
+
+        nav ul { display: flex; list-style: none; gap: 25px; }
+        nav a { text-decoration: none; color: var(--text-light); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: 0.3s; }
+        nav a:hover { color: var(--gold); }
+
+        .btn-reserve {
+            background: linear-gradient(135deg, #d4af37, #aa820a);
+            color: #000; padding: 10px 20px; border-radius: 4px;
+            font-weight: 600; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 80vh; background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(15,17,21,1)), url('image_14.png') center/cover;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 120px 20px 40px;
+        }
+
+        .hero-subtitle { color: var(--gold); font-size: 0.85rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 15px; }
+        .hero h1 { font-family: 'Cinzel', serif; font-size: 3rem; color: #fff; margin-bottom: 15px; }
+
+        /* Dynamic Booking Widget */
+        .booking-widget {
+            background: rgba(24, 27, 32, 0.95); border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px; padding: 25px; display: flex; flex-wrap: wrap; gap: 20px;
+            align-items: center; justify-content: center; backdrop-filter: blur(10px);
+            margin-top: 30px; max-width: 1100px; width: 100%;
+        }
+
+        .field-group { display: flex; flex-direction: column; gap: 5px; text-align: left; }
+        .field-group label { font-size: 0.75rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
+        .field-group select, .field-group input {
+            background: #0f1115; border: 1px solid #333; color: #fff;
+            padding: 10px 15px; border-radius: 4px; font-family: inherit; outline: none; min-width: 160px;
+        }
+
+        .btn-check {
+            background: #25D366; color: #fff; border: none; padding: 12px 25px;
+            border-radius: 4px; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-top: 18px;
+            transition: 0.3s; display: flex; align-items: center; gap: 10px;
+        }
+        .btn-check:hover { background: #1eb954; }
+
+        #total-price { color: var(--gold); font-weight: bold; font-size: 1.4rem; }
+
+        /* Section Layouts */
+        .container { max-width: 1200px; margin: 60px auto; padding: 0 20px; }
+        .section-title { font-family: 'Cinzel', serif; color: var(--gold); text-align: center; font-size: 2.2rem; margin-bottom: 40px; position: relative; }
+        .section-title::after { content: ''; width: 60px; height: 2px; background: var(--gold); display: block; margin: 10px auto 0; }
+
+        /* Rooms & Gallery Cards */
+        .cards-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
+        }
+
+        .card {
+            background: var(--card-bg); border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 10px; overflow: hidden; transition: 0.3s;
+        }
+        .card:hover { transform: translateY(-5px); border-color: var(--gold); }
+        .card img { width: 100%; height: 230px; object-fit: cover; }
+        .card-content { padding: 20px; }
+        .card-content h3 { font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 10px; }
+        .tag-breakfast {
+            display: inline-block; background: rgba(37, 211, 102, 0.15); border: 1px solid #25D366;
+            color: #25D366; padding: 4px 10px; border-radius: 15px; font-size: 0.75rem; font-weight: 600; margin-bottom: 12px;
+        }
+
+        /* Description Section */
+        .card-desc {
+            background: var(--card-bg); border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 35px; border-radius: 10px;
+        }
+        .badge-couple {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: rgba(212, 175, 55, 0.15); border: 1px solid var(--gold);
+            color: var(--gold); padding: 10px 18px; border-radius: 20px; font-weight: 500; margin-top: 15px;
+        }
+
+        /* Highlights Footer */
+        .highlights { display: flex; justify-content: center; gap: 30px; margin-top: 20px; color: var(--gold); font-size: 0.9rem; flex-wrap: wrap; }
+        .highlights div { display: flex; align-items: center; gap: 8px; }
+
+        footer { text-align: center; padding: 20px; color: var(--text-muted); border-top: 1px solid #222; margin-top: 40px; }
+
+        @media(max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            nav ul { display: none; }
+            .booking-widget { flex-direction: column; width: 100%; }
+            .field-group { width: 100%; }
+            .field-group select, .field-group input { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="brand">
+                <img src="image_13.png" alt="Logo">
+                <div class="brand-text">LA TOUR DE TOILE</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#about">À Propos</a></li>
+                    <li><a href="#chambres">Chambres</a></li>
+                    <li><a href="#galerie">Piscine & Services</a></li>
+                    <li><a href="#booking">Réservation</a></li>
+                </ul>
+            </nav>
+            <a href="#booking" class="btn-reserve">Réserver</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-subtitle">✨ Maison d'Hôtes • Taroudant</div>
+        <h1>Maison d'hotes la tour de toile</h1>
+
+        <!-- Dynamic Booking Widget -->
+        <div class="booking-widget" id="booking">
+            <div class="field-group">
+                <label>Hébergement</label>
+                <select id="room-type" onchange="updateGuestOptions(); calculateTotal();">
+                    <option value="chambre">Chambre Double (Max 4 pers)</option>
+                    <option value="suite">Suite (Max 7 pers - Prix fixe)</option>
+                </select>
+            </div>
+
+            <div class="field-group">
+                <label>Personnes</label>
+                <select id="guests" onchange="calculateTotal()"></select>
+            </div>
+
+            <div class="field-group">
+                <label>Date d'arrivée</label>
+                <input type="date" id="checkin">
+            </div>
+
+            <div class="field-group">
+                <label>Nuits</label>
+                <input type="number" id="nights" value="1" min="1" style="width: 80px;" onchange="calculateTotal()">
+            </div>
+
+            <div class="field-group">
+                <label>Prix / Nuit</label>
+                <div id="price-per-night" style="color: #aaa; font-size: 0.9rem;">400 DH / nuit</div>
+            </div>
+
+            <div class="field-group">
+                <label>Total Estimé</label>
+                <div id="total-price">400 DH</div>
+            </div>
+
+            <button class="btn-check" onclick="sendWhatsAppBooking()"><i class="fab fa-whatsapp"></i> Réserver via WhatsApp</button>
+        </div>
+
+        <div class="highlights">
+            <div><i class="fas fa-coffee"></i> Petit-déjeuner Inclus</div>
+            <div><i class="fas fa-wifi"></i> Wi-Fi Gratuit</div>
+            <div><i class="fas fa-swimming-pool"></i> Piscine Extérieure</div>
+            <div><i class="fas fa-utensils"></i> Cuisine Marocaine & Halal</div>
+        </div>
+    </section>
+
+    <!-- Description Section -->
+    <section id="about" class="container">
+        <div class="card-desc">
+            <h2 style="font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 15px;">À Propos de l'Établissement</h2>
+            <p>Situé à Taroudant, l’établissement Maison d'hotes la tour de toile comprend une connexion Wi-Fi gratuite, la climatisation, un jardin et une piscine extérieure.</p>
+            <p>Un petit-déjeuner continental est servi sur place. Sur place, vous pourrez profiter d’un restaurant qui propose des plats marocains, ainsi que des options végétariennes et halal.</p>
+            <p>Vous pourrez profiter d'une terrasse.</p>
+            <p>L'aéroport le plus proche (Aéroport d'Agadir-Al Massira) est à 47 km. Un service de navette aéroport payant peut être assuré par l’établissement.</p>
+            
+            <div class="badge-couple">
+                <i class="fas fa-heart"></i> Les couples apprécient particulièrement l'emplacement de cet établissement. Ils lui donnent la note de 8,6 pour un séjour à deux.
+            </div>
+        </div>
+    </section>
+
+    <!-- Rooms Section -->
+    <section id="chambres" class="container">
+        <h2 class="section-title">Nos Chambres & Suites</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <img src="image_8.png" alt="Chambre Double Confort">
+                <div class="card-content">
+                    <span class="tag-breakfast"><i class="fas fa-coffee"></i> Petit-déjeuner inclus</span>
+                    <h3>Chambre Double Confort</h3>
+                    <p>Décorée dans un style marocain authentique, idéale pour 1 à 4 personnes avec climatisation et salle de bain privée.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="image_9.png" alt="Chambre Deux Lits">
+                <div class="card-content">
+                    <span class="tag-breakfast"><i class="fas fa-coffee"></i> Petit-déjeuner inclus</span>
+                    <h3>Chambre Lits Jumeaux</h3>
+                    <p>Spacieuse et lumineuse, adaptée aux familles ou amis, équipée de tout le confort moderne.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="image_10.png" alt="Suite Familiale">
+                <div class="card-content">
+                    <span class="tag-breakfast"><i class="fas fa-coffee"></i> Petit-déjeuner inclus</span>
+                    <h3>Grande Suite Familiale</h3>
+                    <p>Un grand espace luxueux pouvant accueillir jusqu'à 7 personnes, parfait pour les grands groupes et familles.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery / Services & Pool -->
+    <section id="galerie" class="container">
+        <h2 class="section-title">Piscine & Services</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <img src="image_14.png" alt="Piscine Extérieure et Jardin">
+                <div class="card-content">
+                    <h3>Piscine & Jardin</h3>
+                    <p>Profitez d'une grande piscine extérieure entourée d'un jardin verdoyant et d'une terrasse ensoleillée.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="image_11.png" alt="Salon Marocain et Restauration">
+                <div class="card-content">
+                    <h3>Restaurant & Gastronomie</h3>
+                    <p>Dégustez un petit-déjeuner continental servi chaque matin ainsi que des spécialités marocaines, végétariennes et halal.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="image_12.png" alt="Espaces de Détente">
+                <div class="card-content">
+                    <h3>Cadre & Détente</h3>
+                    <p>Un havre de paix traditionnel pour se détendre après vos visites guidées ou votre trajet depuis l'aéroport.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Maison d'hotes la tour de toile. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        document.getElementById('checkin').valueAsDate = new Date();
+
+        function updateGuestOptions() {
+            const roomType = document.getElementById('room-type').value;
+            const guestSelect = document.getElementById('guests');
+            guestSelect.innerHTML = '';
+
+            if (roomType === 'chambre') {
+                for (let i = 1; i <= 4; i++) {
+                    let opt = document.createElement('option');
+                    opt.value = i;
+                    opt.innerText = i + (i === 1 ? " Personne" : " Personnes");
+                    guestSelect.appendChild(opt);
+                }
+            } else if (roomType === 'suite') {
+                for (let i = 1; i <= 7; i++) {
+                    let opt = document.createElement('option');
+                    opt.value = i;
+                    opt.innerText = i + (i === 1 ? " Personne" : " Personnes");
+                    guestSelect.appendChild(opt);
+                }
+            }
+        }
+
+        function calculateTotal() {
+            const roomType = document.getElementById('room-type').value;
+            const guests = parseInt(document.getElementById('guests').value) || 1;
+            const nights = parseInt(document.getElementById('nights').value) || 1;
+            let pricePerNight = 400;
+
+            if (roomType === 'chambre') {
+                if (guests <= 2) {
+                    pricePerNight = 400;
+                } else if (guests === 3) {
+                    pricePerNight = 450;
+                } else if (guests === 4) {
+                    pricePerNight = 500;
+                }
+            } else if (roomType === 'suite') {
+                pricePerNight = 700;
+            }
+
+            const total = pricePerNight * nights;
+
+            document.getElementById('price-per-night').innerText = pricePerNight + " DH / nuit";
+            document.getElementById('total-price').innerText = total + " DH";
+        }
+
+        function sendWhatsAppBooking() {
+            const roomSelect = document.getElementById('room-type');
+            const roomText = roomSelect.options[roomSelect.selectedIndex].text;
+            const guests = document.getElementById('guests').value;
+            const checkin = document.getElementById('checkin').value;
+            const nights = document.getElementById('nights').value;
+            const pricePerNight = document.getElementById('price-per-night').innerText;
+            const total = document.getElementById('total-price').innerText;
+
+            const message = `Bonjour, je souhaite réserver à Maison d'hotes la tour de toile :%0A` +
+                            `- Type : ${roomText}%0A` +
+                            `- Nombre de personnes : ${guests}%0A` +
+                            `- Petit-déjeuner : Inclus%0A` +
+                            `- Date d'arrivée : ${checkin}%0A` +
+                            `- Durée : ${nights} nuit(s)%0A` +
+                            `- Tarif par nuit : ${pricePerNight}%0A` +
+                            `- Total estimé : ${total}`;
+
+            window.open(`https://wa.me/212661511752?text=${message}`, '_blank');
+        }
+
+        updateGuestOptions();
+        calculateTotal();
+    </script>
+</body>
+</html>
