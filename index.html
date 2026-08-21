@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Tour de Toile - Luxury Hotel & Resort</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --gold: #d4af37;
+            --gold-hover: #f3e5ab;
+            --bg-dark: #0f1115;
+            --card-bg: #181b20;
+            --text-light: #f5f5f5;
+            --text-muted: #a0a0a0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-dark); color: var(--text-light); }
+
+        /* Navigation Bar */
+        header {
+            background: rgba(15, 17, 21, 0.95);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1300px; margin: 0 auto; display: flex;
+            justify-content: space-between; align-items: center; padding: 15px 30px;
+        }
+
+        .brand { display: flex; align-items: center; gap: 15px; }
+        .brand img { height: 50px; }
+        .brand-text { font-family: 'Cinzel', serif; font-size: 1.4rem; color: var(--gold); letter-spacing: 2px; }
+
+        nav ul { display: flex; list-style: none; gap: 25px; }
+        nav a { text-decoration: none; color: var(--text-light); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: 0.3s; }
+        nav a:hover { color: var(--gold); }
+
+        .btn-reserve {
+            background: linear-gradient(135deg, #d4af37, #aa820a);
+            color: #000; padding: 10px 20px; border-radius: 4px;
+            font-weight: 600; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 85vh; background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(15,17,21,1)), url('image_14.png') center/cover;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px;
+        }
+
+        .hero-subtitle { color: var(--gold); font-size: 0.85rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 15px; }
+        .hero h1 { font-family: 'Cinzel', serif; font-size: 3.5rem; color: #fff; margin-bottom: 15px; }
+        .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin-bottom: 40px; }
+
+        /* Dynamic Booking Widget */
+        .booking-widget {
+            background: rgba(24, 27, 32, 0.9); border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px; padding: 20px; display: flex; flex-wrap: wrap; gap: 15px;
+            align-items: center; justify-content: center; backdrop-filter: blur(10px);
+        }
+
+        .field-group { display: flex; flex-direction: column; gap: 5px; text-align: left; }
+        .field-group label { font-size: 0.75rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
+        .field-group select, .field-group input {
+            background: #0f1115; border: 1px solid #333; color: #fff;
+            padding: 10px 15px; border-radius: 4px; font-family: inherit; outline: none;
+        }
+
+        .btn-check {
+            background: var(--gold); color: #000; border: none; padding: 12px 25px;
+            border-radius: 4px; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-top: 18px;
+            transition: 0.3s;
+        }
+        .btn-check:hover { background: var(--gold-hover); }
+
+        /* Highlights */
+        .highlights { display: flex; justify-content: center; gap: 30px; margin-top: 30px; color: var(--gold); font-size: 0.9rem; }
+        .highlights div { display: flex; align-items: center; gap: 8px; }
+
+        /* Price Output */
+        #total-price { color: var(--gold); font-weight: bold; font-size: 1.2rem; }
+
+        @media(max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            nav ul { display: none; }
+            .booking-widget { flex-direction: column; width: 100%; }
+            .field-group { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="brand">
+                <img src="image_13.png" alt="Logo">
+                <div class="brand-text">LA TOUR DE TOILE</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#about">À Propos</a></li>
+                    <li><a href="#chambres">Chambres</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="#booking" class="btn-reserve">Réserver</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-subtitle">✨ Maison d'Hôtes de Charme • Taroudant</div>
+        <h1>Une Élégance Intemporelle</h1>
+        <p>Découvrez l'authenticité et le luxe au cœur du Souss dans un cadre d'exception.</p>
+
+        <!-- Booking Bar -->
+        <div class="booking-widget" id="booking">
+            <div class="field-group">
+                <label>Catégorie</label>
+                <select id="room-type" onchange="calculateTotal()">
+                    <option value="400">Chambre Simple (400 DH/nuit)</option>
+                    <option value="600" selected>Chambre Double (600 DH/nuit)</option>
+                    <option value="900">Suite Familiale (900 DH/nuit)</option>
+                </select>
+            </div>
+
+            <div class="field-group">
+                <label>Date d'arrivée</label>
+                <input type="date" id="checkin">
+            </div>
+
+            <div class="field-group">
+                <label>Nuits</label>
+                <input type="number" id="nights" value="1" min="1" style="width: 70px;" onchange="calculateTotal()">
+            </div>
+
+            <div class="field-group">
+                <label>Personnes</label>
+                <select id="guests">
+                    <option>1 Personne</option>
+                    <option selected>2 Personnes</option>
+                    <option>3+ Personnes</option>
+                </select>
+            </div>
+
+            <div class="field-group">
+                <label>Total Estimé</label>
+                <div id="total-price">600 DH</div>
+            </div>
+
+            <button class="btn-check" onclick="sendWhatsAppBooking()"><i class="fab fa-whatsapp"></i> Réserver</button>
+        </div>
+
+        <div class="highlights">
+            <div><i class="fas fa-check-circle"></i> Réservation Directe</div>
+            <div><i class="fas fa-swimming-pool"></i> Piscine & Jardin</div>
+            <div><i class="fas fa-utensils"></i> Gastronomie Locale</div>
+        </div>
+    </section>
+
+    <script>
+        // Set default date to today
+        document.getElementById('checkin').valueAsDate = new Date();
+
+        function calculateTotal() {
+            const roomPrice = parseInt(document.getElementById('room-type').value);
+            const nights = parseInt(document.getElementById('nights').value) || 1;
+            const total = roomPrice * nights;
+            document.getElementById('total-price').innerText = total + " DH";
+        }
+
+        function sendWhatsAppBooking() {
+            const roomSelect = document.getElementById('room-type');
+            const roomName = roomSelect.options[roomSelect.selectedIndex].text;
+            const checkin = document.getElementById('checkin').value;
+            const nights = document.getElementById('nights').value;
+            const guests = document.getElementById('guests').value;
+            const total = document.getElementById('total-price').innerText;
+
+            const message = `Bonjour, je souhaite réserver à La Tour de Toile :%0A` +
+                            `- Logement : ${roomName}%0A` +
+                            `- Arrivée : ${checkin}%0A` +
+                            `- Durée : ${nights} nuit(s)%0A` +
+                            `- Nombre de personnes : ${guests}%0A` +
+                            `- Total estimé : ${total}`;
+
+            window.open(`https://wa.me/212661511752?text=${message}`, '_blank');
+        }
+    </script>
+</body>
+</html>
