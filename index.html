@@ -32,8 +32,6 @@
             justify-content: space-between; align-items: center; padding: 15px 30px;
         }
 
-        .brand { display: flex; align-items: center; gap: 15px; }
-        .brand img { height: 50px; }
         .brand-text { font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--gold); letter-spacing: 2px; }
 
         nav ul { display: flex; list-style: none; gap: 25px; }
@@ -48,12 +46,25 @@
 
         /* Hero Section */
         .hero {
-            min-height: 80vh; background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(15,17,21,1)), url('image_14.png') center/cover;
+            min-height: 80vh; 
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(15,17,21,1)), url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80') center/cover;
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 120px 20px 40px;
         }
 
         .hero-subtitle { color: var(--gold); font-size: 0.85rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 15px; }
         .hero h1 { font-family: 'Cinzel', serif; font-size: 3rem; color: #fff; margin-bottom: 15px; }
+
+        /* Location Button */
+        .btn-map {
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 8px 18px; border-radius: 20px;
+            text-decoration: none; font-size: 0.85rem;
+            display: inline-flex; align-items: center; gap: 8px;
+            margin-top: 10px; transition: 0.3s;
+        }
+        .btn-map:hover { background: var(--gold); color: #000; }
 
         /* Dynamic Booking Widget */
         .booking-widget {
@@ -84,7 +95,7 @@
         .section-title { font-family: 'Cinzel', serif; color: var(--gold); text-align: center; font-size: 2.2rem; margin-bottom: 40px; position: relative; }
         .section-title::after { content: ''; width: 60px; height: 2px; background: var(--gold); display: block; margin: 10px auto 0; }
 
-        /* Rooms & Gallery Cards */
+        /* Cards */
         .cards-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
         }
@@ -102,7 +113,12 @@
             color: #25D366; padding: 4px 10px; border-radius: 15px; font-size: 0.75rem; font-weight: 600; margin-bottom: 12px;
         }
 
-        /* Description Section */
+        /* Map Section */
+        .map-section {
+            background: var(--card-bg); border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 25px; border-radius: 10px; text-align: center; margin-top: 40px;
+        }
+
         .card-desc {
             background: var(--card-bg); border: 1px solid rgba(212, 175, 55, 0.2);
             padding: 35px; border-radius: 10px;
@@ -113,7 +129,6 @@
             color: var(--gold); padding: 10px 18px; border-radius: 20px; font-weight: 500; margin-top: 15px;
         }
 
-        /* Highlights Footer */
         .highlights { display: flex; justify-content: center; gap: 30px; margin-top: 20px; color: var(--gold); font-size: 0.9rem; flex-wrap: wrap; }
         .highlights div { display: flex; align-items: center; gap: 8px; }
 
@@ -132,15 +147,12 @@
 
     <header>
         <div class="nav-container">
-            <div class="brand">
-                <img src="image_13.png" alt="Logo">
-                <div class="brand-text">LA TOUR DE TOILE</div>
-            </div>
+            <div class="brand-text">LA TOUR DE TOILE</div>
             <nav>
                 <ul>
                     <li><a href="#about">À Propos</a></li>
                     <li><a href="#chambres">Chambres</a></li>
-                    <li><a href="#galerie">Piscine & Services</a></li>
+                    <li><a href="#location">Localisation</a></li>
                     <li><a href="#booking">Réservation</a></li>
                 </ul>
             </nav>
@@ -152,7 +164,12 @@
         <div class="hero-subtitle">✨ Maison d'Hôtes • Taroudant</div>
         <h1>Maison d'hotes la tour de toile</h1>
 
-        <!-- Dynamic Booking Widget -->
+        <!-- Direct Map Button -->
+        <a href="https://maps.google.com/?q=30.46819,-9.06158" target="_blank" class="btn-map">
+            <i class="fas fa-map-marker-alt"></i> Dachra Ouled Brahim, Taroudant (Google Maps)
+        </a>
+
+        <!-- Booking Widget -->
         <div class="booking-widget" id="booking">
             <div class="field-group">
                 <label>Hébergement</label>
@@ -194,39 +211,37 @@
             <div><i class="fas fa-coffee"></i> Petit-déjeuner Inclus</div>
             <div><i class="fas fa-wifi"></i> Wi-Fi Gratuit</div>
             <div><i class="fas fa-swimming-pool"></i> Piscine Extérieure</div>
-            <div><i class="fas fa-utensils"></i> Cuisine Marocaine & Halal</div>
+            <div><i class="fas fa-utensils"></i> Cuisine Marocaine</div>
         </div>
     </section>
 
-    <!-- Description Section -->
+    <!-- About -->
     <section id="about" class="container">
         <div class="card-desc">
             <h2 style="font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 15px;">À Propos de l'Établissement</h2>
             <p>Situé à Taroudant, l’établissement Maison d'hotes la tour de toile comprend une connexion Wi-Fi gratuite, la climatisation, un jardin et une piscine extérieure.</p>
             <p>Un petit-déjeuner continental est servi sur place. Sur place, vous pourrez profiter d’un restaurant qui propose des plats marocains, ainsi que des options végétariennes et halal.</p>
-            <p>Vous pourrez profiter d'une terrasse.</p>
-            <p>L'aéroport le plus proche (Aéroport d'Agadir-Al Massira) est à 47 km. Un service de navette aéroport payant peut être assuré par l’établissement.</p>
             
             <div class="badge-couple">
-                <i class="fas fa-heart"></i> Les couples apprécient particulièrement l'emplacement de cet établissement. Ils lui donnent la note de 8,6 pour un séjour à deux.
+                <i class="fas fa-heart"></i> Les couples apprécient particulièrement l'emplacement de cet établissement. Note: 8,6/10.
             </div>
         </div>
     </section>
 
-    <!-- Rooms Section -->
+    <!-- Rooms -->
     <section id="chambres" class="container">
         <h2 class="section-title">Nos Chambres & Suites</h2>
         <div class="cards-grid">
             <div class="card">
-                <img src="image_8.png" alt="Chambre Double Confort">
+                <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80" alt="Chambre Double">
                 <div class="card-content">
                     <span class="tag-breakfast"><i class="fas fa-coffee"></i> Petit-déjeuner inclus</span>
                     <h3>Chambre Double Confort</h3>
-                    <p>Décorée dans un style marocain authentique (400 DH pour 2 pers, 450 DH pour 3 pers, 500 DH pour 4 pers).</p>
+                    <p>Décoration marocaine chaleureuse. (400 DH pour 1-2 pers, 450 DH pour 3 pers, 500 DH pour 4 pers).</p>
                 </div>
             </div>
             <div class="card">
-                <img src="image_9.png" alt="Chambre Deux Lits">
+                <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=600&q=80" alt="Chambre Lits Jumeaux">
                 <div class="card-content">
                     <span class="tag-breakfast"><i class="fas fa-coffee"></i> Petit-déjeuner inclus</span>
                     <h3>Chambre Lits Jumeaux</h3>
@@ -234,41 +249,32 @@
                 </div>
             </div>
             <div class="card">
-                <img src="image_10.png" alt="Suite Familiale">
+                <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80" alt="Suite Familiale">
                 <div class="card-content">
                     <span class="tag-breakfast"><i class="fas fa-coffee"></i> Petit-déjeuner inclus</span>
                     <h3>Grande Suite Familiale</h3>
-                    <p>Un grand espace luxueux pouvant accueillir jusqu'à 7 personnes pour un prix fixe de 700 DH / nuit.</p>
+                    <p>Grand espace luxueux accueillant jusqu'à 7 personnes pour un tarif fixe de 700 DH / nuit.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Gallery / Services & Pool -->
-    <section id="galerie" class="container">
-        <h2 class="section-title">Piscine & Services</h2>
-        <div class="cards-grid">
-            <div class="card">
-                <img src="image_14.png" alt="Piscine Extérieure et Jardin">
-                <div class="card-content">
-                    <h3>Piscine & Jardin</h3>
-                    <p>Profitez d'une grande piscine extérieure entourée d'un jardin verdoyant et d'une terrasse ensoleillée.</p>
-                </div>
-            </div>
-            <div class="card">
-                <img src="image_11.png" alt="Salon Marocain et Restauration">
-                <div class="card-content">
-                    <h3>Restaurant & Gastronomie</h3>
-                    <p>Dégustez un petit-déjeuner continental servi chaque matin ainsi que des spécialités marocaines, végétariennes et halal.</p>
-                </div>
-            </div>
-            <div class="card">
-                <img src="image_12.png" alt="Espaces de Détente">
-                <div class="card-content">
-                    <h3>Cadre & Détente</h3>
-                    <p>Un havre de paix traditionnel pour se détendre après vos visites guidées ou votre trajet depuis l'aéroport.</p>
-                </div>
-            </div>
+    <!-- Location & Map -->
+    <section id="location" class="container">
+        <h2 class="section-title">Localisation & Accès</h2>
+        <div class="map-section">
+            <p style="margin-bottom: 15px;"><i class="fas fa-map-pin" style="color: var(--gold);"></i> <strong>Adresse :</strong> Village Dachra Ouled Brahim, Commune Rurale Zaouite Sidi Tahar, Taroudant</p>
+            <p style="margin-bottom: 20px; color: var(--text-muted);">Coordonnées GPS : 30.46819, -9.06158</p>
+            
+            <!-- Embedded Google Map -->
+            <iframe 
+                src="https://maps.google.com/maps?q=30.46819,-9.06158&hl=fr&z=14&output=embed" 
+                width="100%" 
+                height="380" 
+                style="border:1px solid rgba(212,175,55,0.3); border-radius: 8px;" 
+                allowfullscreen="" 
+                loading="lazy">
+            </iframe>
         </div>
     </section>
 
